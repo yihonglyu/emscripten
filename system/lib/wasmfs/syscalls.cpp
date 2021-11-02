@@ -282,7 +282,9 @@ long __syscall_fstat64(long fd, long buf) {
   return __WASI_ERRNO_SUCCESS;
 }
 
-__wasi_fd_t __syscall_open(long pathname, long flags, long mode) {
+__wasi_fd_t __syscall_openat(long dirfd, long pathname, long flags, long mode) {
+  // TODO: implement fd-relative open
+  assert(dirfd == AT_FDCWD);
   int accessMode = (flags & O_ACCMODE);
   bool canWrite = false;
 

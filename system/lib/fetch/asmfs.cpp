@@ -1054,7 +1054,7 @@ static long open(const char* pathname, int flags, int mode) {
   return (long)desc;
 }
 
-long __syscall_open(long path, long flags, ...)
+long __syscall_openat(long dirfd, long path, long flags, ...)
 {
   va_list vl;
   va_start(vl, flags);
@@ -1206,7 +1206,7 @@ long __syscall_link(long oldpath, long newpath)
   RETURN_ERRNO(ENOTSUP, "TODO: link() is a stub and not yet implemented in ASMFS");
 }
 
-long __syscall_unlink(long path)
+long __syscall_unlinkat(long dirfd, long path, long flags)
 {
   const char* pathname = (const char *)path;
 #ifdef ASMFS_DEBUG
