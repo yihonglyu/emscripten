@@ -69,7 +69,13 @@ var EXITSTATUS;
 /** @type {function(*, string=)} */
 function assert(condition, text) {
   if (!condition) {
-    abort('Assertion failed: ' + text);
+#if ASSERTIONS
+    abort('Assertion failed' + (text ? ': ' + text : ''));
+#else
+    // Perhaps we should instead avoid including this function at all when
+    // ASSERTIONS is not defined.
+    abort(text);
+#endif
   }
 }
 
