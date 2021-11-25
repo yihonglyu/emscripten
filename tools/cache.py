@@ -37,7 +37,7 @@ class Cache:
     self.filelock = filelock.FileLock(self.filelock_name)
 
   def acquire_cache_lock(self):
-    if config.FROZEN_CACHE:
+    if config.FROZEN_CACHE and not settings.WASMFS:
       # Raise an exception here rather than exit_with_error since in practice this
       # should never happen
       raise Exception('Attempt to lock the cache but FROZEN_CACHE is set')
