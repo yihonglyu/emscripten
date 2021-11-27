@@ -61,8 +61,11 @@ int main() {
   // Try to make a directory with an empty pathname.
   errno = 0;
   mkdir("", 0777);
-  printf("Errno: %s\n", strerror(errno));
+#ifdef WASMFS
+  assert(errno == ENOENT);
+#else
   assert(errno == EINVAL);
+#endif
 
   // Try to make the root directory.
   errno = 0;

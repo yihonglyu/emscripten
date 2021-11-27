@@ -91,7 +91,7 @@ int main() {
   errno = 0;
   // Attempt to open a blank path.
   int fd7 = open("", O_RDONLY);
-  assert(errno == EINVAL);
+  assert(errno == ENOENT);
 
   return 0;
 }
